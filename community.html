@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRMU Community | Campus Chronicles</title>
+  <link rel="stylesheet" href="community.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="top-accent"></div>
+
+  <header class="top-header">
+    <div class="header-container">
+      <div class="tagline">Welcome To K.R. Mangalam University</div>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="community-section">
+    <h1>KRMU Community 💬</h1>
+    <p class="subtitle">Where students and alumni connect, share, and grow together.</p>
+
+    <div class="filter-bar">
+      <button onclick="filterPosts('all')" class="filter-btn active">All</button>
+      <button onclick="filterPosts('students')" class="filter-btn">Students</button>
+      <button onclick="filterPosts('alumni')" class="filter-btn">Alumni</button>
+    </div>
+
+    <div class="create-post">
+      <h3>Share Something With the Community</h3>
+      <textarea id="postText" placeholder="Write your thoughts, memories, or advice..." rows="3"></textarea>
+      <input type="file" id="postImage" accept="image/*" />
+      <select id="roleSelect">
+        <option value="students">I’m a Student</option>
+        <option value="alumni">I’m an Alumni</option>
+      </select>
+      <button id="postBtn" class="upload-btn">Post</button>
+    </div>
+
+    <div class="ask-alumni">
+      <h3>Ask Alumni for Guidance 🎓</h3>
+      <textarea id="questionText" placeholder="Ask for tips about placements, internships, or life at KRMU..."></textarea>
+      <button id="askBtn" class="upload-btn">Post Question</button>
+    </div>
+
+    <div id="feed" class="feed"></div>
+
+    <section class="alumni-spotlight">
+      <h2>Alumni Spotlight 🌟</h2>
+      <div class="alumni-grid">
+        <div class="alumni-card">
+          <img src="assets/images/alumni1.jpg" alt="Alumni 1" />
+          <h4>Rahul Mehta</h4>
+          <p>Software Engineer at Google</p>
+          <a href="mailto:rahul.mehta@krmualumni.in?subject=Hello from KRMU Student"><button class="connect-btn">Connect</button></a>
+        </div>
+        <div class="alumni-card">
+          <img src="assets/images/alumni2.jpg" alt="Alumni 2" />
+          <h4>Jasleen Kaur</h4>
+          <p>Data Scientist at Microsoft</p>
+          <a href="mailto:jasleen.kaur@krmualumni.in?subject=Hello from KRMU Student"><button class="connect-btn">Connect</button></a>
+        </div>
+        <div class="alumni-card">
+          <img src="assets/images/alumni3.jpg" alt="Alumni 3" />
+          <h4>Rohit Sharma</h4>
+          <p>UX Designer at Swiggy</p>
+          <a href="mailto:rohit.sharma@krmualumni.in?subject=Hello from KRMU Student"><button class="connect-btn">Connect</button></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Campus Chronicles | Team Unique Syntax</p>
+  </footer>
+
+  <script>
+    const feed = document.getElementById("feed");
+    const postText = document.getElementById("postText");
+    const postImage = document.getElementById("postImage");
+    const postBtn = document.getElementById("postBtn");
+    const roleSelect = document.getElementById("roleSelect");
+    const questionText = document.getElementById("questionText");
+    const askBtn = document.getElementById("askBtn");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    const posts = [
+      { user: "Priyanshi (B.Tech CSE)", role: "students", text: "Had the best time at the Cultural Fest 2024! ❤️", image: "assets/images/fest1.jpg", likes: 4 },
+      { user: "Vansh (Alumni)", role: "alumni", text: "Always proud to see KRMU students achieving great things!", image: "", likes: 5 },
+      { user: "Riya (Student)", role: "students", text: "Any tips for preparing for coding interviews?", image: "", likes: 2 }
+    ];
+
+    let currentFilter = "all";
+
+    function renderPosts(filtered = posts) {
+      feed.innerHTML = "";
+      filtered.slice().reverse().forEach((p, index) => {
+        const postDiv = document.createElement("div");
+        postDiv.classList.add("post");
+
+        postDiv.innerHTML = `
+          <div class="post-header">
+            <div class="avatar">${p.user.charAt(0)}</div>
+            <div class="user-info">
+              <h4>${p.user}</h4>
+              <p class="time">${p.role === "alumni" ? "🎓 Alumni" : "👩‍🎓 Student"}</p>
+            </div>
+          </div>
+          <p class="post-text">${p.text}</p>
+          ${p.image ? `<img src="${p.image}" class="post-image" alt="Post image">` : ""}
+          <div class="post-actions">
+            <button class="like-btn" onclick="likePost(${posts.length - 1 - index})">❤️ ${p.likes}</button>
+          </div>
+        `;
+        feed.appendChild(postDiv);
+      });
+    }
+
+    renderPosts();
+
+    function likePost(index) {
+      posts[index].likes += 1;
+      applyFilter();
+    }
+
+    postBtn.addEventListener("click", () => {
+      const text = postText.value.trim();
+      const file = postImage.files[0];
+      const role = roleSelect.value;
+      if (text === "" && !file) return alert("Please write something or upload an image!");
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        posts.push({
+          user: role === "alumni" ? "Anonymous Alumni" : "Anonymous Student",
+          role,
+          text,
+          image: file ? e.target.result : "",
+          likes: 0
+        });
+        postText.value = "";
+        postImage.value = "";
+        renderPosts();
+      };
+      if (file) reader.readAsDataURL(file);
+      else {
+        posts.push({ user: "Anonymous Student", role, text, image: "", likes: 0 });
+        postText.value = "";
+        renderPosts();
+      }
+    });
+
+    askBtn.addEventListener("click", () => {
+      const text = questionText.value.trim();
+      if (!text) return alert("Please type your question first!");
+      posts.push({
+        user: "Anonymous Student",
+        role: "students",
+        text: "❓ " + text,
+        image: "",
+        likes: 0
+      });
+      questionText.value = "";
+      renderPosts();
+    });
+
+    function filterPosts(role) {
+      currentFilter = role;
+      filterButtons.forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+      applyFilter();
+    }
+
+    function applyFilter() {
+      if (currentFilter === "all") renderPosts(posts);
+      else renderPosts(posts.filter(p => p.role === currentFilter));
+    }
+  </script>
+</body>
+</html>

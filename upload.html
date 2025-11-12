@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Your Memory | Campus Chronicles</title>
+  <link rel="stylesheet" href="upload.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="top-accent"></div>
+
+  <header class="top-header">
+    <div class="header-container">
+      <div class="tagline">Welcome To K.R. Mangalam University</div>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="explore.html">College Map</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="upload-section">
+    <div class="form-container">
+      <h1>Share Your Campus Memory 📸</h1>
+      <p class="subtitle">Upload a photo, add a short caption, and select where this memory belongs!</p>
+
+      <form id="memoryForm">
+        <label for="area">Select Campus Area</label>
+        <select id="area" name="area" required>
+          <option value="">-- Choose an area --</option>
+          <option value="A Block">A Block</option>
+          <option value="B Block">B Block</option>
+          <option value="C Block">C Block</option>
+          <option value="D Block">Library</option>
+          <option value="Sports Ground">Sports Ground</option>
+          <option value="Hostel Area">Hostel Area</option>
+          <option value="Entry Gate">Entry Gate</option>
+        </select>
+
+        <label for="caption">Write a Caption</label>
+        <textarea id="caption" name="caption" rows="3" placeholder="Share what made this moment special..." required></textarea>
+
+        <label for="photo">Upload Image</label>
+        <input type="file" id="photo" name="photo" accept="image/*" required>
+
+        <button type="submit" class="upload-btn">Upload Memory</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Campus Chronicles | Team Unique Syntax</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('memoryForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('✅ Your memory has been submitted successfully! (Demo Frontend Only)');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

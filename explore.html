@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Map | Campus Chronicles</title>
+  <link rel="stylesheet" href="explore.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-accent"></div>
+
+  <header class="top-header">
+    <div class="header-container">
+      <div class="tagline">Welcome To K.R. Mangalam University</div>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="map-section">
+    <h1>Interactive Campus Map</h1>
+    <p class="subtitle">Click on different blocks to explore memories</p>
+
+    <div class="map-container">
+      <img src="images/map.png" alt="KRMU Map" class="campus-map">
+
+      <div class="hotspot" style="top: 77%; left: 62.5%;" onclick="openModal('A Block')"></div>
+  <div class="hotspot" style="top: 65%; left: 71.5%;" onclick="openModal('C Block')"></div>
+  <div class="hotspot" style="top: 65%; left: 54%;" onclick="openModal('B Block')"></div>
+  <div class="hotspot" style="top: 20%; left: 53%;" onclick="openModal('D Block')"></div>
+  <div class="hotspot" style="top: 50%; left: 45%;" onclick="openModal('Sports Ground')"></div>
+  <div class="hotspot" style="top: 50%; left: 28%;" onclick="openModal('Hostel Area')"></div>
+  <div class="hotspot" style="top: 85%; left: 63%;" onclick="openModal('Entry Gate')"></div>
+    </div>
+  </main>
+
+  <div id="memoryModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">Area Name</h2>
+      <div id="modalMemories" class="memories-grid"></div>
+      <button class="upload-btn" onclick="window.location.href='upload.html'">Add Your Memory</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2025 Campus Chronicles | Team Unique Syntax</p>
+  </footer>
+
+  <script>
+    const memoryData = {
+      "A Block": [
+        { img: "assets/images/a1.jpg", text: "A Block – Freshers' Orientation Day memories!" },
+        { img: "assets/images/a2.jpg", text: "Project presentations held in A Block labs." }
+      ],
+      "B Block": [
+        { img: "assets/images/b1.jpg", text: "Coding Marathon organized by the CS department." },
+        { img: "assets/images/b2.jpg", text: "Poster-making competition for tech fest." }
+      ],
+      "C Block": [
+        { img: "assets/images/c1.jpg", text: "C Block – Creativity exhibition area!" },
+        { img: "assets/images/c2.jpg", text: "Photography Club displays from 2024 event." }
+      ],
+      "D Block": [
+        { img: "assets/images/lib1.jpg", text: "Library reading hall – calm and peaceful!" },
+        { img: "assets/images/lib2.jpg", text: "Students preparing for exams together." }
+      ],
+      "Sports Ground": [
+        { img: "assets/images/ground1.jpg", text: "Football tournament finals!" },
+        { img: "assets/images/ground2.jpg", text: "Annual Sports Meet 2025 memories." }
+      ],
+      "Hostel Area": [
+        { img: "assets/images/hostel1.jpg", text: "Hostel courtyard during movie night!" },
+        { img: "assets/images/hostel2.jpg", text: "Birthday celebrations with friends." }
+      ],
+      "Entry Gate": [
+        { img: "assets/images/gate1.jpg", text: "Welcoming new students to KRMU!" },
+        { img: "assets/images/gate2.jpg", text: "Independence Day parade starting here." }
+      ]
+    };
+
+    function openModal(area) {
+      const modal = document.getElementById('memoryModal');
+      const title = document.getElementById('modalTitle');
+      const container = document.getElementById('modalMemories');
+
+      title.textContent = area;
+      container.innerHTML = "";
+
+      if (memoryData[area]) {
+        memoryData[area].forEach(memory => {
+          const card = document.createElement('div');
+          card.classList.add('memory-card');
+          card.innerHTML = `
+            <img src="${memory.img}" alt="${area}">
+            <p>${memory.text}</p>
+          `;
+          container.appendChild(card);
+        });
+      } else {
+        container.innerHTML = "<p>No memories added yet. Be the first to share yours!</p>";
+      }
+
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('memoryModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
