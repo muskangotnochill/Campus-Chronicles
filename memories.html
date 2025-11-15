@@ -52,27 +52,28 @@
   <script>
     const events = {
       "Induction Program 2025": [
-        { type: "image", src: "assets/images/tech1.jpg", caption: "Day 1" },
-        { type: "image", src: "assets/images/tech1.jpg", caption: "Day 2" },
-        { type: "image", src: "assets/images/tech1.jpg", caption: "Day 3" },
-        { type: "image", src: "assets/images/tech1.jpg", caption: "Day 4" },
-        { type: "image", src: "assets/images/tech1.jpg", caption: "Day 5" }
+        { type: "image", src: "images/induc1.jpg", caption: "Orientation Day" },
+        { type: "image", src: "images/induc2.jpg", caption: "Aarambh 2025" },
       ],
       "EDM Fest 2025": [
-        { type: "image", src: "assets/images/fest1.jpg", caption: "DJ Elina Chauhan" },
-        { type: "video", src: "assets/videos/fest2.mp4", caption: "DJ Ola Ras" },
-        { type: "video", src: "assets/videos/fest2.mp4"}
+        { type: "image", src: "images/edm3.jpg", caption: "DJ Elina Chauhan" },
+        { type: "video", src: "images/edm2.mp4", caption: "DJ Ola Ras" },
+        { type: "video", src: "images/edm1.mp4"}
       ],
       "Diwali Mela 2025": [
-        { type: "image", src: "assets/images/orientation1.jpg", caption: "Stalls" },
-        { type: "video", src: "assets/videos/orientation2.mp4", caption: "Music Competition" },
-        { type: "video", src: "assets/videos/fest2.mp4", caption: "Dance Competition" },
-        { type: "image", src: "assets/videos/fest2.mp4", caption: "Moments" }
+        { type: "image", src: "images/dm1.jpg", caption: "Stalls" },
+        { type: "video", src: "assets/videos/orientation2.mp4", caption: "Music Competition" }
       ],
       "IDEAS 3.O": [
-        { type: "image", src: "assets/images/tech1.jpg", caption: "Music Competition" },
-        { type: "video", src: "assets/videos/fest2.mp4", caption: "RCR Performance" },
-        { type: "video", src: "assets/videos/fest2.mp4", caption: "Live Band" }
+        { type: "image", src: "images/ideas1.jpg", caption: "Music Competition" },
+        { type: "video", src: "images/ideas2.mp4", caption: "RCR Performance" },
+        { type: "video", src: "images/ideas3.mp4", caption: "Live Band" }
+      ],
+      "NSS Campaign": [
+        { type: "image", src: "images/nss1.jpg", caption: "NSS 1" },
+        { type: "image", src: "images/nss3.jpg", caption: "NSS 2" },
+        { type: "image", src: "images/nss2.jpg", caption: "NSS 3" },
+        { type: "image", src: "images/nss4.jpg", caption: "NSS 4" }
       ]
     };
 
@@ -127,7 +128,7 @@
           caption
         };
         events[currentEvent].push(newMemory);
-        openModal(currentEvent); // refresh
+        openModal(currentEvent); 
         document.getElementById("uploadForm").reset();
       }
     });
